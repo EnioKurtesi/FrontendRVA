@@ -2,6 +2,10 @@ package rva.jpa;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 
@@ -9,13 +13,15 @@ import java.util.List;
  * The persistent class for the fakultet database table.
  * 
  */
+@JsonIgnoreProperties({
+"hibernateLazyInitializer", "handler" })
 @Entity
 @NamedQuery(name="Fakultet.findAll", query="SELECT f FROM Fakultet f")
 public class Fakultet implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="FAKULTET_ID_GENERATOR", sequenceName="FAKULTET_SEQ")
+	@SequenceGenerator(name="FAKULTET_ID_GENERATOR", sequenceName="FAKULTET_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FAKULTET_ID_GENERATOR")
 	private Integer id;
 
@@ -24,7 +30,8 @@ public class Fakultet implements Serializable {
 	private String sediste;
 
 	//bi-directional many-to-one association to Departman
-	@OneToMany(mappedBy="fakultet")
+	@JsonIgnore
+	@OneToMany(mappedBy="fakultet", cascade = {CascadeType.DETACH, CascadeType.REMOVE})
 	private List<Departman> departmans;
 
 	public Fakultet() {
