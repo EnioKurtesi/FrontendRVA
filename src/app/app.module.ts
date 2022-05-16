@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HomeComponent } from './components/core/home/home.component';
 import { AuthorComponent } from './components/core/author/author.component';
@@ -17,7 +18,14 @@ import { StudentComponent } from './components/student/student.component';
 import { FakultetComponent } from './components/fakultet/fakultet.component';
 import { StatusComponent } from './components/status/status.component';
 import { DepartmanComponent } from './components/departman/departman.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { StatusDialogComponent } from './components/dialogs/status-dialog/status-dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +36,8 @@ import { DepartmanComponent } from './components/departman/departman.component';
     StudentComponent,
     FakultetComponent,
     StatusComponent,
-    DepartmanComponent
+    DepartmanComponent,
+    StatusDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +48,15 @@ import { DepartmanComponent } from './components/departman/departman.component';
     MatListModule,
     MatGridListModule,
     MatExpansionModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTableModule,
+    HttpClientModule,
+    MatToolbarModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
