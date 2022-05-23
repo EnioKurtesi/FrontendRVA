@@ -26,6 +26,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fakultet-dialog.component';
+import { DepartmanDialogComponent } from './components/dialogs/departman-dialog/departman-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { FormsModule } from '@angular/forms';
     FakultetComponent,
     StatusComponent,
     DepartmanComponent,
-    StatusDialogComponent
+    StatusDialogComponent,
+    FakultetDialogComponent,
+    DepartmanDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,9 @@ import { FormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
