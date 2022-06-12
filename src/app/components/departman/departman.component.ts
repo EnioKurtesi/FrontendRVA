@@ -1,5 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Departman } from 'src/app/models/departman';
@@ -17,6 +19,9 @@ export class DepartmanComponent implements OnInit, OnDestroy {
 
   dataSource!: MatTableDataSource<Departman>;
   subscription!: Subscription;
+  selektovanDepartman!: Departman;
+  @ViewChild(MatSort, {static:false}) sort!: MatSort;
+  @ViewChild(MatPaginator, {static:false}) paginator!: MatPaginator;
 
   constructor(private departmanService: DepartmanService,
     private dialog: MatDialog) { }
@@ -27,10 +32,18 @@ export class DepartmanComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadData();
   }
+  selectRow(row: Departman) {
+    this.selektovanDepartman = row;
+  }
   public loadData() {
     this.subscription = this.departmanService.getAllDepartmane().subscribe(data => {
       console.log(data);
       this.dataSource = new MatTableDataSource(data);
+      
+        
+      
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     },
     (error:Error) => {
       console.log(error.name + '' + error.message);
@@ -47,6 +60,13 @@ export class DepartmanComponent implements OnInit, OnDestroy {
         this.loadData();
       } 
     })
+  }
+
+  applyFilter(filterValue: any) {
+    filterValue = filterValue.target.value;
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLocaleLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
 }

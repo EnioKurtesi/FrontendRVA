@@ -1,5 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Status } from 'src/app/models/status';
@@ -17,6 +19,9 @@ export class StatusComponent implements OnInit, OnDestroy {
   dataSource!: MatTableDataSource<Status>;
   subscription!: Subscription;
 
+  @ViewChild(MatSort, {static:false}) sort!: MatSort;
+  @ViewChild(MatPaginator, {static:false}) paginator!: MatPaginator;
+
   constructor(private statusService: StatusService,
     private dialog: MatDialog) { }
   ngOnDestroy(): void {
@@ -32,6 +37,8 @@ export class StatusComponent implements OnInit, OnDestroy {
     this.subscription = this.statusService.getAllStatus().subscribe(data => {
       console.log(data);
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     },
     (error:Error) => {
       console.log(error.name + '' + error.message);
@@ -49,6 +56,13 @@ export class StatusComponent implements OnInit, OnDestroy {
         this.loadData();
       } 
     })
+  }
+
+  applyFilter(filterValue: any) {
+    filterValue = filterValue.target.value;
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLocaleLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
 }

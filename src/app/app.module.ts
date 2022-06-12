@@ -29,6 +29,9 @@ import { FormsModule } from '@angular/forms';
 import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fakultet-dialog.component';
 import { DepartmanDialogComponent } from './components/dialogs/departman-dialog/departman-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
+import { StudentDialogComponent } from './components/dialogs/student-dialog/student-dialog.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import { MatSelectModule } from '@angular/material/select';
     DepartmanComponent,
     StatusDialogComponent,
     FakultetDialogComponent,
-    DepartmanDialogComponent
+    DepartmanDialogComponent,
+    StudentDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule,
+    MatPaginatorModule
     
   ],
   providers: [],
